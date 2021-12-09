@@ -119,12 +119,26 @@ def binary_search_iterative(sorted_list, value):
 #             start - the index of the first element to search from;
 #             end - the index of the last element to search to
 # Returns: The index of the value in the list, or -1 if it does not present
-def binary_search_recursive(sorted_list, value, start, end):
+
+def binary_search_recursive(sorted_list, value, start = 0, end = None):
+
+    # the number 530000 most frequently completes after 5 seconds
 
     # TODO: Implement this function using recursion
+    if end is None:
+        end = len(sorted_list) - 1
 
-    return -1
+    if start > end:
+        return False
 
+    mid = (start + end) // 2
+    if value == sorted_list[mid]:
+        return mid
+
+    if value < sorted_list[mid]:
+        return binary_search_recursive(sorted_list, value, start, mid - 1)
+
+    return binary_search_recursive(sorted_list, value, mid + 1, end)
 
 # ------------------------------------------------------------------------------
 # Purpose: Measures time taken by n random binary searches on a sorted list of
